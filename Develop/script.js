@@ -23,56 +23,65 @@
 // });
 let now = dayjs(); console. log(now. format()); 
 let update = function () {
-  document.getElementById("currentDay").innerHTML = dayjs().format(
+  document.getElementById('currentDay').innerHTML = dayjs().format(
     "dddd, MMM D, h:mm:ss a"
   );
-  setInterval(update, 1000);
 };
+setInterval(update, 1000);
 
-const rows = $(".row");
-let currentHour = parseInt(dayjs().hours);
+function timeTracker() {
+  //get current number of hours.
+  var timeNow = dayjs().hour();
 
-Array.from(rows).forEach((row) => {
-  let rowIdString = row.id,
-    rowHour;
-  if (rowIdString) {
-    rowHour = parseInt(rowIdString);
-  }
-  if (rowHour < 6) {
-    rowHour += 12;
-  }
-  if (rowHour) {
-    // Compares row id to current hour and sets color accordingly
-    if (currentHour === rowHour) {
-      setColor(row, "lightgreen");
-    } else if (currentHour < rowHour) {
-      setColor(row, "lightgrey");
-    } else if (currentHour > rowHour) {
-      setColor(row, "grey");
-    }
-  }
-});
+  // loop over time blocks
+  $(".time-block").each(function () {
+      var blockTime = parseInt($(this).attr("id"));
 
-$(document).ready(function () {
-  let timeSlots = [9, 10, 11, 12, 13, 14, 15, 16];
-  function renderPlans() {
-    for (let i = 0; i <= timeSlots.length; i++) {
-      $("#" + timeSlots[i]).val(localStorage.getItem(timeSlots[i]));
-    }
-  }
-  renderPlans();
+      // To check the time and add the classes for background indicators
+      if (blockTime < timeNow) {
+          $(this).removeClass("future");
+          $(this).removeClass("present");
+          $(this).addClass("past");
+      }
+      else if (blockTime === timeNow) {
+          $(this).removeClass("past");
+          $(this).removeClass("future");
+          $(this).addClass("present");
+      }
+      else {
+          $(this).removeClass("present");
+          $(this).removeClass("past");
+          $(this).addClass("future");
 
-  $(".saveBtn").click(function () {
-    let dataHour = $(this).attr("data-hour");
-    let inputField = $("#" + dataHour).val();
-
-    localStorage.setItem(dataHour, inputField);
-    console.log(inputField);
-  });
-});
-
-
-
-function setColor(element, color) {
-  element.style.backgroundColor = color;
+      }
+  })
 }
+  
+    timeTracker();
+
+
+    // var timeNow = dayjs().hour();
+    // console.log(`The hour is ${timeNow}`);
+// $(document).ready(function () {
+//   let timeSlots = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+//   function renderPlans() {
+//     for (let i = 0; i <= timeSlots.length; i++) {
+//       $("#" + timeSlots[i]).val(localStorage.getItem(timeSlots[i]));
+//     }
+//   }
+//   renderPlans();
+
+//   $(".saveBtn").click(function () {
+//     let dataHour = $(this).attr("data-hour");
+//     let inputField = $("#" + dataHour).val();
+
+//     localStorage.setItem(dataHour, inputField);
+//     console.log(inputField);
+//   });
+// });
+
+
+
+// function setColor(element, color) {
+//   element.style.backgroundColor = color;
+// }

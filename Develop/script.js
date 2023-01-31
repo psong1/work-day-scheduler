@@ -31,7 +31,7 @@
   var threePm = $("#15");
   var fourPm = $("#16");
   var fivePm = $("#17");
-  
+  var hour = dayjs().hour();
   
   function initPage() {
 
@@ -48,36 +48,65 @@
     var init12 = JSON.parse(localStorage.getItem("12:00 pm"))
     twelvePm.val(init12);
     
-    var init1 = JSON.parse(localStorage.getItem("01:00 pm"))
-    onePm.val(init1);
+    var init13 = JSON.parse(localStorage.getItem("01:00 pm"))
+    onePm.val(init13);
     
-    var init2 = JSON.parse(localStorage.getItem("02:00 pm"))
-    twoPm.val(init2);
+    var init14 = JSON.parse(localStorage.getItem("02:00 pm"))
+    twoPm.val(init14);
     
-    var init3 = JSON.parse(localStorage.getItem("03:00 pm"))
-    threePm.val(init3);
+    var init15 = JSON.parse(localStorage.getItem("03:00 pm"))
+    threePm.val(init15);
    
-    var init4 = JSON.parse(localStorage.getItem("04:00 pm"))
-    fourPm.val(init4);
+    var init16 = JSON.parse(localStorage.getItem("04:00 pm"))
+    fourPm.val(init16);
     
-    var init5 = JSON.parse(localStorage.getItem("05:00 pm"))
-    fivePm.val(init5);
-    
-    var init6 = JSON.parse(localStorage.getItem("06:00 pm"))
-    sixPm.val(init6);
-    
-    var init7 = JSON.parse(localStorage.getItem("07:00 pm"))
-    sevenPm.val(init7);
+    var init17 = JSON.parse(localStorage.getItem("05:00 pm"))
+    fivePm.val(init17);
   } 
+  
+// $(document).ready(function () {
+//   let timeSlots = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+//     function renderPlans() {
+//       for (let i = 0; i <= timeSlots.length; i++) {
+//           $("#" + timeSlots[i]).val(localStorage.getItem(timeSlots[i]));
+//         }
+//       }
+//     renderPlans();
+  
+// $(".saveBtn").click(function () {
+//     let dataHour = $(this).attr("rows");
+//     let inputField = $("#" + dataHour).val();
+  
+//       localStorage.setItem(dataHour, inputField);
+//       console.log(inputField);
+    
+//     });
+//   });
+
+$(document).ready(function(){
+  initPage()
+  timeTracker();
+
+  // Buttons (save to Local Storage)
+  $(".saveBtn").on("click", function(){
+    userInput = $(this).siblings(".description").val().trim();
+    console.log(userInput);
+    hourSpan = $(this).siblings(".hour").text().trim();
+    console.log(hourSpan);
+    localStorage.setItem(hourSpan, JSON.stringify(userInput));
+
+  })
+
+
+});
 
 let now = dayjs(); console. log(now. format()); 
-var interval = setInterval(function() {
-  var currentTime = dayjs();
-  $('#currentDay').html(currentTime.format('YYYY MMMM DD') + ' '
-                      + currentTime.format('dddd')
-                       .substring(0,3).toUpperCase());
-  $('#currentDay').html(currentDate + currentTime.format('hh:mm:ss A'));
-}, 1000);
+let update = function () {
+  document.getElementById("currentDay").innerHTML = dayjs().format(
+    "dddd, MMM D, h:mm:ss a"
+  );
+};
+setInterval(update, 1000);
 
 
 function timeTracker() {
@@ -88,9 +117,7 @@ function timeTracker() {
   $(".time-block").each(function () {
       var timeTest = parseInt($(this).attr("id"));
       hour = parseInt(hour);
-      console.log(timeTest);
-      console.log(hour);
-//      console.log(this);
+
       if (hour > timeTest) {
         $(this).addClass("past");
       } else if (hour < timeTest) {
@@ -100,5 +127,17 @@ function timeTracker() {
       }
   });
 }
-  
-  timeTracker();
+
+
+// $(document).ready(function(){
+//   timeTracker();
+//   initPage();
+
+//   $(".saveBtn").on("click", function(){
+//     userInput = $(this).siblings(".time-block").text();
+//     console.log(userInput);
+//     hourSpan = $(this).siblings(".time-block").text();
+//     console.log(hourSpan);
+//     localStorage.setItem(hourSpan, JSON.stringify(userInput));
+//   })
+//   });

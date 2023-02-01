@@ -25,31 +25,31 @@
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   function start() {
-    var start9 = JSON.parse(localStorage.getItem("09:00 am"));
+    const start9 = JSON.parse(localStorage.getItem("09:00 am"));
     nineAm.val(start9);
   
-    var start10 = JSON.parse(localStorage.getItem("10:00 am"))
+    const start10 = JSON.parse(localStorage.getItem("10:00 am"))
     tenAm.val(start10);
     
-    var start11 = JSON.parse(localStorage.getItem("11:00 am"))
+    const start11 = JSON.parse(localStorage.getItem("11:00 am"))
     elevenAm.val(start11);
     
-    var start12 = JSON.parse(localStorage.getItem("12:00 pm"))
+    const start12 = JSON.parse(localStorage.getItem("12:00 pm"))
     twelvePm.val(start12);
     
-    var start13 = JSON.parse(localStorage.getItem("01:00 pm"))
+    const start13 = JSON.parse(localStorage.getItem("01:00 pm"))
     onePm.val(start13);
     
-    var start14 = JSON.parse(localStorage.getItem("02:00 pm"))
+    const start14 = JSON.parse(localStorage.getItem("02:00 pm"))
     twoPm.val(start14);
     
-    var start15 = JSON.parse(localStorage.getItem("03:00 pm"))
+    const start15 = JSON.parse(localStorage.getItem("03:00 pm"))
     threePm.val(start15);
    
-    var start16 = JSON.parse(localStorage.getItem("04:00 pm"))
+    const start16 = JSON.parse(localStorage.getItem("04:00 pm"))
     fourPm.val(start16);
     
-    var start17 = JSON.parse(localStorage.getItem("05:00 pm"))
+    const start17 = JSON.parse(localStorage.getItem("05:00 pm"))
     fivePm.val(start17);
   } 
   

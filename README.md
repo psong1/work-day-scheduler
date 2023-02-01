@@ -14,4 +14,4 @@ This simple work day calendar allows you to schedule and save specific events fr
 
 # Deployed Page URL
 
-*
+* https://psong1.github.io/work-day-scheduler/
